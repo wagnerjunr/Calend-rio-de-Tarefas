@@ -16,7 +16,7 @@ const DailyTask = ({taskName}:boxDayProps) => {
                 {data.map((task: any) => {
                     return (
                         <>
-                        <div className='box-input'>
+                        <div key = {task.id} className='box-input'>
                             <section className='box-infos'>
                                 <input type="checkbox" id={task.id} name="task" />
                                 <label htmlFor={task.id}>{task.title}</label>

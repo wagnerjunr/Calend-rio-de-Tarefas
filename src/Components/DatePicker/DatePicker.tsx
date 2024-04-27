@@ -1,22 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DatePicker, { registerLocale } from "react-datepicker";
 import { ptBR } from 'date-fns/locale/pt-BR';
+import { TaskContext } from "../../Context/TaskContext";
 
 
 import "react-datepicker/dist/react-datepicker.css";
+import taskProps from "../../Types/TaskSchema";
 
 const DatePickerComponent = () => {
-    const [startDate, setStartDate] = useState<Date | null>(null);
-    const [endDate, setEndDate] = useState<Date | null>(null);
-    
+    const { startDate,setStartDate,endDate, setEndDate} = useContext(TaskContext)
+
     registerLocale('ptBR', ptBR)
 
     useEffect(()=>{
-
-        console.log(endDate?.getHours());
-        // if (startDate !== null && endDate !== null && startDate.getTime() < endDate.getTime()) {
-        //     console.log("Horario invalido")
-        // }
+      
     },[endDate])
 
 

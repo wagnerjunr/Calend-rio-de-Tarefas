@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useContext, useEffect} from "react";
 import { FaPlus } from "react-icons/fa6";
 import { Button, FormControl, FormLabel, Select } from '@chakra-ui/react';
 import { Input } from '@chakra-ui/react'
 import DatePickerComponent from "../DatePicker/DatePicker";
 import taskProps from "../../Types/TaskSchema";
+import { TaskContext } from "../../Context/TaskContext";
+
 
 import {
     Modal,
@@ -20,7 +22,8 @@ import {
 const ModalComponent = () => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
-    
+    const { startDate,setStartDate,endDate, setEndDate} = useContext(TaskContext)
+
     const [taskDetails,setTaskDetails] = useState<Omit <taskProps,'id'>>({
         title:"",
         description:"",
@@ -28,6 +31,14 @@ const ModalComponent = () => {
         startDate:null,
         endDate:null,
     })
+
+      // if (startDate !== null && endDate !== null && startDate.getTime() < endDate.getTime()) {
+        //     console.log("Horario invalido")
+        // }
+
+    useEffect(()=>{
+            setTaskDetails({...taskDetails,startDate:startDate,endDate:endDate})
+    },[startDate,endDate])
     
     const changerHandler = (e:any) =>{
         setTaskDetails({...taskDetails,[e.target.name]:e.target.value})
@@ -35,8 +46,18 @@ const ModalComponent = () => {
 
     const addTask = () =>{
         console.log(taskDetails);
+
+
+        setTaskDetails({
+        title:"",
+        description:"",
+        priority:"Baixa",
+        startDate:null,
+        endDate:null,
+        })
         onClose();
     }
+
 
     return (
         <div>
