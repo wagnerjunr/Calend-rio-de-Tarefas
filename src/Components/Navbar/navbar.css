@@ -1,0 +1,33 @@
+.nav-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #9f7aea;
+    font-size: 44px;
+    font-weight: bold;
+    width: 70vw;
+}
+.nav-task{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    gap: 30px;
+}
+.nav-btn{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+    font-size: 14px;
+    width: 140px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background-color:#9f7aea;
+    transition: all 0.1s ease-in;
+}
+
+.nav-btn:hover{
+    background-color:#956fe8;
+    cursor: pointer;
+}
