@@ -1,7 +1,7 @@
 import React from 'react'
 import './navbar.css'
 import { IoSearchSharp } from "react-icons/io5";
- import Modal from '../Modal/Modal';
+ import ModalComponent from '../Modal/Modal';
 
 
 
@@ -11,7 +11,7 @@ const Navbar = () => {
             <h1>Tarefas</h1>
             <div className='nav-task'>
                 <IoSearchSharp style={{width:"30px"}}/>
-                 <Modal/>
+                 <ModalComponent mode = {"newTask"}></ModalComponent>
             </div>
         </div>
     )

@@ -1,10 +1,10 @@
 type taskProps = {
-    id:Number;
-    title:String;
-    description?:String;
+    id:number;
+    title:string;
+    description?:string;
     priority:"Baixa" | "Média" | "Alta";
-    startDate:Date | null;
-    endDate:Date | null;
+    startDate:Date | null | string | undefined;
+    endDate:Date | null | string| undefined;
 }
 
 export default taskProps

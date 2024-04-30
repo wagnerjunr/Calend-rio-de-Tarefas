@@ -26,6 +26,7 @@
     display: flex;
     justify-content: space-between;
     padding: 10px;
+    overflow-x: auto;
 }
 .box-infos{
     display: flex;
@@ -39,4 +40,7 @@
     display: flex;
     align-items: center;
     gap:10px;
+}
+.box-edit:hover{
+    cursor:pointer
 }

@@ -1,11 +1,12 @@
-import React, { useState,useContext, useEffect} from "react";
-import { FaPlus } from "react-icons/fa6";
+import React, { useState, useContext, useEffect } from "react";
+import DatePickerComponent from "../DatePicker/DatePicker";
+import { TaskContext } from "../../Context/TaskContext";
+import taskProps from "../../Types/TaskSchema";
+
 import { Button, FormControl, FormLabel, Select } from '@chakra-ui/react';
 import { Input } from '@chakra-ui/react'
-import DatePickerComponent from "../DatePicker/DatePicker";
-import taskProps from "../../Types/TaskSchema";
-import { TaskContext } from "../../Context/TaskContext";
-
+import { FaPlus } from "react-icons/fa6";
+import { FaRegEdit } from "react-icons/fa";
 
 import {
     Modal,
@@ -18,70 +19,72 @@ import {
     useDisclosure,
 } from '@chakra-ui/react'
 
+type modeModalProps = {
+    mode: string;
+    task?: taskProps;
+}
 
-const ModalComponent = () => {
+const ModalComponent = ({ mode, task }: modeModalProps) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const { startDate,setStartDate,endDate, setEndDate} = useContext(TaskContext)
+    const { startDate, endDate, taskDetails, setTaskDetails, updateTask, editTask, resetModal } = useContext(TaskContext)
 
-    const [taskDetails,setTaskDetails] = useState<Omit <taskProps,'id'>>({
-        title:"",
-        description:"",
-        priority:"Baixa",
-        startDate:null,
-        endDate:null,
-    })
-
-      // if (startDate !== null && endDate !== null && startDate.getTime() < endDate.getTime()) {
-        //     console.log("Horario invalido")
-        // }
-
-    useEffect(()=>{
-            setTaskDetails({...taskDetails,startDate:startDate,endDate:endDate})
-    },[startDate,endDate])
-    
-    const changerHandler = (e:any) =>{
-        setTaskDetails({...taskDetails,[e.target.name]:e.target.value})
-      }
-
-    const addTask = () =>{
-        console.log(taskDetails);
-
-
-        setTaskDetails({
-        title:"",
-        description:"",
-        priority:"Baixa",
-        startDate:null,
-        endDate:null,
-        })
-        onClose();
+    const changerHandler = (e: any) => {
+        setTaskDetails({ ...taskDetails, [e.target.name]: e.target.value })
     }
+    useEffect(() => {
+        if (startDate !== taskDetails.startDate) {
+            const startDateFormat = formatDate(startDate);
+            setTaskDetails({ ...taskDetails, startDate: startDateFormat });
+        }
+        if (endDate !== taskDetails.endDate) {
+            const endDateFormat = formatDate(endDate);
+            setTaskDetails({ ...taskDetails, endDate: endDateFormat });
+        }
+    }, [startDate, endDate])
 
+    const formatDate = (dateTime: Date | null) => {
+        if (dateTime) {
+            const date = dateTime.toISOString().replace(/T.*$/, '')
+            const hours = String(dateTime.getHours()).padStart(2, '0');
+            const minutes = String(dateTime.getMinutes()).padStart(2, '0');
+            return `${date}T${hours}:${minutes}`;
+        }
+    };
+
+    const editTaskHandler = () => {
+        if (task) {
+            editTask(task.id);
+            onOpen();
+        }
+    };
 
     return (
         <div>
-            <button className='nav-btn' onClick={onOpen}><FaPlus />Adicionar Tarefa</button>
+            {mode === "newTask" ? <button className='nav-btn' onClick={() => { resetModal(); onOpen(); }}>
+                <FaPlus />Adicionar Tarefa
+            </button> : <FaRegEdit onClick={editTaskHandler} />}
+
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Nova Tarefa</ModalHeader>
+                    {mode === "newTask" ? <ModalHeader>Nova Tarefa</ModalHeader> : <ModalHeader>Editar Tarefa</ModalHeader>}
                     <ModalCloseButton />
                     <ModalBody>
                         <FormControl isRequired>
                             <FormLabel>Título</FormLabel>
-                            <Input type='text' name='title' onChange={changerHandler} placeholder='Título da Tarefa'></Input>
+                            <Input value={taskDetails.title} type='text' name='title' onChange={changerHandler} placeholder='Título da Tarefa'></Input>
                         </FormControl>
                         <FormControl>
                             <FormLabel>Descrição</FormLabel>
-                            <Input type='text' name='description'onChange={changerHandler} placeholder='Descrição da Tarefa'></Input>
+                            <Input value={taskDetails.description} type='text' name='description' onChange={changerHandler} placeholder='Descrição da Tarefa'></Input>
                         </FormControl>
                         <FormControl>
                             <FormLabel>Prioridade</FormLabel>
-                            <Select name = 'priority' onChange={changerHandler}>
-                                <option selected>Baixa</option>
-                                <option>Média</option>
-                                <option>Alta</option>
+                            <Select name='priority' onChange={changerHandler}>
+                                <option value="Baixa" selected>Baixa</option>
+                                <option value="Média">Média</option>
+                                <option value="Alta">Alta</option>
                             </Select>
                         </FormControl>
                         <FormControl isRequired>
@@ -91,8 +94,15 @@ const ModalComponent = () => {
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button colorScheme='blue' mr={3} onClick={addTask} >
-                            Adicionar
+                        <Button colorScheme='blue' mr={3} onClick={() => {
+                            if (mode === "newTask") {
+                                updateTask('/addtask');
+                            } else if (task) {
+                                updateTask(`/updatetask?id=${task.id}`);
+                            }
+                            onClose();
+                        }}>
+                            Salvar
                         </Button>
                         <Button colorScheme='blue' mr={3} onClick={onClose}>
                             Fechar
