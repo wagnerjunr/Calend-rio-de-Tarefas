@@ -1,6 +1,7 @@
 .calendar-container {
   width: 70vw;
   margin-top: 60px;
+  z-index: 1;
 
 }
 

@@ -35,7 +35,7 @@
     border-left:5px solid yellow;
 }
 .high-priority{
-    border-left:5px solid red;
+     border-left:5px solid red;
 }
 .box-infos{
     display: flex;
@@ -47,6 +47,7 @@
 
 .completed-task{
     text-decoration: line-through; 
+    color:rgb(0, 0, 0,0.2);
 }
 .box-edit{
     display: flex;

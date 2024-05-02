@@ -11,7 +11,7 @@ import './searchbar.css'
 export default function SearchBar() {
     const [searchTask, setSearchTask] = useState('');
     const [searchResults, setSearchResult] = useState<taskProps[]>([]);
-    const [showResults, setShowResults] = useState(false); // Estado para controlar a visibilidade dos resultados
+    const [showResults, setShowResults] = useState(false); 
     const { allTasks } = useContext(TaskContext);
     const modalRef = useRef<HTMLDivElement | null>(null);
 
@@ -19,18 +19,16 @@ export default function SearchBar() {
         const value = e.target.value;
         setSearchTask(value);
         if (value === '') {
-            setShowResults(false); // Se o valor estiver vazio, esconde os resultados
+            setShowResults(false); 
         } else {
             const results = allTasks.filter(task => task.title.toLowerCase().includes(value.toLowerCase()));
             setSearchResult(results);
-            setShowResults(true); // Mostra os resultados se houver algum valor no campo de entrada
+            setShowResults(true); 
         }
     };
 
-
-
     useEffect(() => {
-        // Função para verificar se o clique foi dentro da div
+
         const handleClick = (event: any) => {
             if (modalRef.current && modalRef.current.contains(event?.target)) {
                 console.log('Clique dentro da div!');
@@ -56,7 +54,7 @@ export default function SearchBar() {
                     value={searchTask}
                     type='text'
                     placeholder='Digite o título da tarefa'
-                    onChange={handleChange} // Adiciona evento onBlur para esconder os resultados ao sair do input
+                    onChange={handleChange} 
                     style={{ width: "450px",color:"black" }}
                 />
             </InputGroup>
