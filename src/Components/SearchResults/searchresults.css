@@ -33,3 +33,9 @@
     align-items: center;
     gap: 5px;
 }
+
+@media(max-width:950px){
+    .search-results{
+        width: 350px;
+    }
+}

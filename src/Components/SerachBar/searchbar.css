@@ -1,0 +1,11 @@
+@media(max-width:1140px){
+    .searchbar{
+        width: 350px;
+    }
+}
+
+@media(max-width:950px){
+    .searchbar{
+        width: 250px;
+    }
+}

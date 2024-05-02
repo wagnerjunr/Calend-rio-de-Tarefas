@@ -44,3 +44,20 @@
 .task-list:hover{
     background-color:#956fe8;
 }
+
+@media(max-width:950px){
+    .sidebar-drawer{
+        display: flex;
+        flex-direction: column;
+    }
+    .sidebar-container{
+        width: 320px;
+    }
+}
+
+@media(max-width:500px){
+  
+    .sidebar-container{
+        width: 250px;
+    }
+}

@@ -8,3 +8,9 @@
     padding: 40px;
     margin-left: 40px;
 }
+
+@media(max-width:950px){
+    .container-sidebar{
+        display: none;
+    }
+}

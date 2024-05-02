@@ -6,12 +6,16 @@
     font-size: 44px;
     font-weight: bold;
     width: 70vw;
+    gap: 10px;
 }
 .nav-task{
     display: flex;
     justify-content: center;
     align-items:center;
     gap: 30px;
+}
+.menu-drawer{
+    display: none;
 }
 .nav-btn{
     display: flex;
@@ -30,4 +34,31 @@
 .nav-tas:hover{
     background-color:#956fe8;
     cursor: pointer;
+}
+
+@media(max-width:950px){
+    .nav-menu{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .nav-container{
+        font-size: 36px;
+    }
+    .menu-drawer{
+        display: inline-block;
+    }
+}
+
+@media(max-width:840px){
+    .nav-container{
+        display: flex;
+        flex-direction: column;
+    }
+}
+@media(max-width:630px){
+    .nav-task{
+        display: flex;
+        flex-direction: column;
+    }
 }

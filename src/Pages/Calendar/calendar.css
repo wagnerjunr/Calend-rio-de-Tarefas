@@ -4,12 +4,10 @@
   z-index: 1;
 
 }
-
 .fc-h-event {
   background-color: #9f7aea;
   border: none;
 }
-
 .fc-h-event:hover {
   cursor: pointer;
 }
@@ -36,4 +34,13 @@
 
 .fc-v-event:hover {
   cursor: pointer;
+}
+
+@media(max-width:710px){
+  .calendar-container{
+      width: 60vw;
+  }
+  .fc .fc-button{
+    display: none;
+  }
 }
