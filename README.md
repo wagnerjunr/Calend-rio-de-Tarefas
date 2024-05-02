@@ -1,46 +1,74 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Calendário de tarefas
 
-## Available Scripts
+O "Calendário de tarefas" é um aplicativo React que permite aos usuários gerenciar suas tarefas diárias com a ajuda de um calendário interativo. Este aplicativo utiliza uma variedade de bibliotecas modernas para criar uma experiência de usuário suave e responsiva.
 
-In the project directory, you can run:
+## Recursos
 
-### `npm start`
+- Visualização e interação com o calendário diário, semanal e mensal.
+- Adição, remoção e edição de lembretes no calendário.
+- Estilos personalizáveis com `@chakra-ui/react` e `@emotion/styled`.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Tecnologias Utilizadas
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- React 18.3.0
+- TypeScript 4.9.5
+- Chakra UI, Emotion para estilos
+- FullCalendar para funcionalidades do calendário
+- React Router para roteamento
 
-### `npm test`
+## Instalação
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Para executar o "Calendário de tarefas" localmente, siga estas etapas:
 
-### `npm run build`
+### Pré-requisitos
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Certifique-se de ter o Node.js instalado em sua máquina. Se não, você pode baixá-lo e instalá-lo de [Node.js website](https://nodejs.org/).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Clonar o repositório
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Para obter a cópia do projeto em sua máquina local, use o seguinte comando:
 
-### `npm run eject`
+```bash
+git clone https://github.com/wagnerjunr/Calendario-Tarefas.git
+cd Calendario-Tarefas
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Instalar dependências
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Dentro do diretório do projeto, execute:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+npm install
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Este comando instala todas as dependências necessárias listadas no `package.json`.
 
-## Learn More
+### Executar o aplicativo
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Para iniciar o servidor de desenvolvimento e executar o aplicativo:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm start
+```
+
+Após executar o comando, o aplicativo estará acessível em `http://localhost:3000`.
+
+## Scripts Disponíveis
+
+Dentro do diretório do projeto, você pode rodar:
+
+- `npm start`: Roda o app em modo de desenvolvimento.
+- `npm run build`: Compila o app para produção na pasta `build`.
+
+## Contribuir
+
+Contribuições são sempre bem-vindas! Sinta-se à vontade para abrir issues ou submeter pull requests.
+
+## Licença
+
+Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
+
+## Autor
+
+- Wagner Junior (https://github.com/wagnerjunr)
