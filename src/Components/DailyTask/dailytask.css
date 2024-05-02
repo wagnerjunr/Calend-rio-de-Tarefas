@@ -28,6 +28,15 @@
     padding: 10px;
     overflow-x: auto;
 }
+.low-priority{
+    border-left:5px solid green;
+}
+.medium-priority{
+    border-left:5px solid yellow;
+}
+.high-priority{
+    border-left:5px solid red;
+}
 .box-infos{
     display: flex;
     align-items: center;
@@ -36,6 +45,9 @@
     font-weight: 400;
 }
 
+.completed-task{
+    text-decoration: line-through; 
+}
 .box-edit{
     display: flex;
     align-items: center;

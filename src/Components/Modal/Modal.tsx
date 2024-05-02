@@ -27,7 +27,7 @@ type modeModalProps = {
     open?:string;
 }
 
-const ModalComponent = ({ mode, id, date,open }: modeModalProps) => {
+const ModalComponent = ({ mode, id,date,open }: modeModalProps) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { startDate, endDate,
@@ -57,6 +57,9 @@ const ModalComponent = ({ mode, id, date,open }: modeModalProps) => {
     useEffect(()=>{
         if(open){
             onOpen();
+        }
+        if(open && id){
+            editTaskHandler();
         }
         if(date){
             resetModal();

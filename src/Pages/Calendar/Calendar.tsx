@@ -20,7 +20,6 @@ const Calendar = () => {
         setDate(arg.dateStr);
         console.log(arg.dateStr)
     }
-    
 
     const handleEventClick = (e:any) => {
       const eventId = e.event.id;
@@ -50,7 +49,7 @@ const Calendar = () => {
 
             />
                 {date && <ModalComponent mode={"newTask"} date={date} open={"open"} />}
-                {editModal && <ModalComponent mode={"editTask"} id={Number(clickedId)} date={date} open={"open"} />}
+                {editModal && <ModalComponent mode={"editTask"} id={Number(clickedId)} open={"open"} />}
             </div>
     )
 }
