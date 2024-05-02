@@ -15,12 +15,17 @@ type TaskContextProps = {
     setAllTasks?: React.Dispatch<React.SetStateAction<taskProps[]>>;
     taskDetails: Omit<taskProps, 'id'>;
     setTaskDetails: React.Dispatch<React.SetStateAction<Omit<taskProps, "id">>>
-    updateTask: (update:string ) => void;
+    updateTask: (update: string) => void;
     deleteTask: (id: number) => void;
     editTask: (id: number) => void;
-    resetModal:()=>void;
+    resetModal: () => void;
+    isError:boolean;
+    setIsError:React.Dispatch<React.SetStateAction<boolean>>;
+    editModal:boolean;
+    setEditModal:React.Dispatch<React.SetStateAction<boolean>>;
+    date:string | null;
+    setDate:React.Dispatch<React.SetStateAction<string | null>>;
 }
-
 const initialValue = {
     startDate: null,
     setStartDate: () => { },
@@ -46,7 +51,13 @@ const initialValue = {
     updateTask: () => { },
     deleteTask: () => { },
     editTask: () => { },
-    resetModal:()=>{}
+    resetModal: () => { },
+    isError:false,
+    setIsError: () => { },
+    editModal:false,
+    setEditModal:() => { },
+    date:null,
+    setDate:() => { },
 
 } as TaskContextProps
 
@@ -57,10 +68,9 @@ export const TaskContextProvider = ({ children }: TaskProviderProps) => {
     const [endDate, setEndDate] = useState<Date | null>(null);
     const [allTasks, setAllTasks] = useState<taskProps[]>([]);
     const [taskDetails, setTaskDetails] = useState<Omit<taskProps, 'id'>>(initialValue.taskDetails)
-
+    const [isError, setIsError] = useState(false);
     const [editModal, setEditModal] = useState(false);
-    let countTasks = 0;
-
+    const [date,setDate] = useState<string |null>(null);
 
     const refetchTasks = async () => {
         await fetch('http://localhost:4000/alltasks')
@@ -76,7 +86,7 @@ export const TaskContextProvider = ({ children }: TaskProviderProps) => {
         refetchTasks();
     }, [])
 
-    const resetModal = ()=>{
+    const resetModal = () => {
         setTaskDetails({
             title: "",
             description: "",
@@ -86,13 +96,13 @@ export const TaskContextProvider = ({ children }: TaskProviderProps) => {
         });
         setEndDate(null);
         setStartDate(null);
+        setIsError(false);
     }
 
-    const updateTask = async (update:string) => {
+    const updateTask = async (update: string) => {
 
-        // if (startDate !== null && endDate !== null && startDate.getTime() < endDate.getTime()) {
-        //     console.log("Horario invalido")
-        // }
+        
+
         await fetch(`http://localhost:4000${update}`, {
             method: 'POST',
             headers: {
@@ -101,7 +111,6 @@ export const TaskContextProvider = ({ children }: TaskProviderProps) => {
             },
             body: JSON.stringify(taskDetails),
         }).then((resp) => { resp.json(); console.log(resp); }).then((data) => {
-            alert("Tarefa adicionada");
             refetchTasks();
             resetModal();
         }).catch((error) => {
@@ -135,7 +144,7 @@ export const TaskContextProvider = ({ children }: TaskProviderProps) => {
                 }
             });
             const task = await res.json();
-            const { title, description, priority} = task
+            const { title, description, priority } = task
 
             const taskData: Omit<taskProps, 'id'> = {
                 title,
@@ -154,7 +163,17 @@ export const TaskContextProvider = ({ children }: TaskProviderProps) => {
     }
 
     return (
-        <TaskContext.Provider value={{ startDate, setStartDate, endDate, setEndDate, allTasks, taskDetails, setTaskDetails, updateTask, deleteTask, editTask,resetModal }}>
+        <TaskContext.Provider value={{ startDate, setStartDate,
+         endDate, setEndDate,
+          allTasks,
+           taskDetails, setTaskDetails, 
+           updateTask, 
+           deleteTask,
+            editTask, 
+            resetModal,
+            isError,setIsError,
+            editModal,setEditModal,
+            date,setDate }}>
             {children}
         </TaskContext.Provider>
     )

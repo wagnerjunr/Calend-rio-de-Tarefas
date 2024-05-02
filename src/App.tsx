@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import Navbar from "./Components/Navbar/Navbar";
 import './app.css'
+import { DataContextProvider } from "./Context/DateContext";
 
 function App() {
 

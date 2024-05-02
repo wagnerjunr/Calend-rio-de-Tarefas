@@ -7,4 +7,11 @@ type taskProps = {
     endDate:Date | null | string| undefined;
 }
 
+export type dataProps = {
+    id:string;
+    title: string;
+    start: string;
+    end: string;
+}
+
 export default taskProps

@@ -3,25 +3,31 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import { ptBR } from 'date-fns/locale/pt-BR';
 import { TaskContext } from "../../Context/TaskContext";
 
-
 import "react-datepicker/dist/react-datepicker.css";
+import './datepicker.css'
 import taskProps from "../../Types/TaskSchema";
 
-const DatePickerComponent = () => {
-    const { startDate,setStartDate,endDate, setEndDate} = useContext(TaskContext)
+type dateProps = {
+    date?:string | null;
+}
 
+const DatePickerComponent = ({date}:dateProps) => {
+    const dateString = String(date);
+    const [year, month, day] = dateString.split('-').map(Number);
+    const dateObject:Date|null = new Date(year, month - 1, day); 
+
+    const { startDate,setStartDate,endDate, setEndDate,isError} = useContext(TaskContext)
+    const [dateTaskCalendar,setDateTaskCalendar] = useState<Date | null>(dateObject);
     registerLocale('ptBR', ptBR)
-
-    useEffect(()=>{
-      
-    },[endDate])
 
 
     return (
-        <div> <DatePicker
+        <div className="container-datepicker">
+            <DatePicker className={isError?"datainvalida":"datepicker"}
             showIcon
             locale="ptBR"
-            selected={startDate} onChange={(date) => setStartDate(date)}
+            selected={date?dateTaskCalendar:startDate} 
+            onChange={(date) => {setDateTaskCalendar(date);setStartDate(date)}}
             selectsStart
             startDate={startDate}
             endDate={endDate}
@@ -30,8 +36,9 @@ const DatePickerComponent = () => {
             timeIntervals={30}
             timeFormat="p"
             placeholderText="Selecione data e horário"
+            
         />
-            <DatePicker
+            <DatePicker className={isError?"datainvalida":"datepicker"}
                 showIcon
                 locale="ptBR"
                 selected={endDate} onChange={(date) => setEndDate(date)}

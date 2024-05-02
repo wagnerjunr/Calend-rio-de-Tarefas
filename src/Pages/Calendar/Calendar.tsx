@@ -1,19 +1,34 @@
-import React from 'react'
+import React,{useContext,useState}from "react";
 import Fullcalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
+import { DataContext } from "../../Context/DateContext";
 import interactionPlugin, { Draggable, DropArg } from "@fullcalendar/interaction";
 import brLocale from '@fullcalendar/core/locales/pt-br';
+import { TaskContext } from "../../Context/TaskContext";
 
 import './calendar.css'
+import ModalComponent from "../../Components/Modal/Modal";
 
 const Calendar = () => {
 
+    const {dataTasks} = useContext(DataContext);
+    const {date,setDate,editModal,setEditModal} = useContext(TaskContext);
+    const [clickedId, setClickedId] = useState(null);
+
     const handleDateClick = (arg: any) => {
-        alert(arg.dateStr)
+        setDate(arg.dateStr);
+        console.log(arg.dateStr)
     }
+    
+
+    const handleEventClick = (e:any) => {
+      const eventId = e.event.id;
+      setClickedId(eventId);
+      setEditModal(true);
+    };
     return (
-        <div className='calendar-container'>
+        <div className='calendar-container' >
             <Fullcalendar
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                 locale={brLocale}
@@ -26,18 +41,17 @@ const Calendar = () => {
                     end: "dayGridMonth,timeGridWeek,timeGridDay",
                 }}
                 timeZone='GMT-3'
-                events={[
-                    {title: 'Tarefa 1',start: '2024-04-27T12:30',end:''},
-                    { title: 'event 2', date: '2024-04-25' }
-                ]}
+                events={dataTasks}
+                eventClick={handleEventClick}
                 nowIndicator={true}
-                editable={true}
-                droppable={true}
                 selectable={true}
                 selectMirror={true}
                 height="70vh"
 
-            /></div>
+            />
+                {date && <ModalComponent mode={"newTask"} date={date} open={"open"} />}
+                {editModal && <ModalComponent mode={"editTask"} id={Number(clickedId)} date={date} open={"open"} />}
+            </div>
     )
 }
 

@@ -9,6 +9,7 @@ import Calendar from './Pages/Calendar/Calendar';
 
 import { ChakraProvider } from '@chakra-ui/react'
 import { TaskContextProvider } from './Context/TaskContext';
+import { DataContextProvider } from './Context/DateContext';
 
 
 const root = ReactDOM.createRoot(
@@ -32,7 +33,9 @@ root.render(
   <React.StrictMode>
     <ChakraProvider>
       <TaskContextProvider>
-        <RouterProvider router={router}></RouterProvider>
+        <DataContextProvider>
+          <RouterProvider router={router}></RouterProvider>
+        </DataContextProvider>
       </TaskContextProvider>
     </ChakraProvider>
   </React.StrictMode>

@@ -1,0 +1,16 @@
+.container-datepicker{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.datepicker{
+    border: 1px solid rgb(0, 0, 0,0.1);
+    border-radius: 5px;
+    width: 100%;
+}
+
+.datainvalida{
+    border: 2px solid red;
+    border-radius: 5px;
+    width: 100%;
+}

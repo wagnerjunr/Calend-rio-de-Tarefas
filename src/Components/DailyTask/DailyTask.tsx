@@ -10,7 +10,7 @@ type boxDayProps = {
 }
 
 const DailyTask = ({taskName}:boxDayProps) => {
-    const {allTasks,editTask} = useContext(TaskContext)
+    const {allTasks} = useContext(TaskContext)
     
     return (
         <div className='daily-container'>
@@ -25,7 +25,7 @@ const DailyTask = ({taskName}:boxDayProps) => {
                                 <label htmlFor={String(task.id)}>{task.title}</label>
                             </section>
                             <section className='box-edit'>
-                                <ModalComponent mode = {"editTask"} task={task}></ModalComponent>
+                                <ModalComponent mode = {"editTask"} id={task.id}></ModalComponent>
                                 <Alert id={task.id}></Alert>
                             </section>
                         </div>

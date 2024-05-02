@@ -26,7 +26,7 @@ type idProps = {
 
     return (
         <>
-          <IoMdClose onClick={onOpen}></IoMdClose>
+          <IoMdClose size={20} className='btn-edit'onClick={onOpen}></IoMdClose>
           <AlertDialog
             motionPreset='slideInBottom'
             leastDestructiveRef={cancelRef}
