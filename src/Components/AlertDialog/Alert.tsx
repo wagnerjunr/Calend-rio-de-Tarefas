@@ -14,10 +14,11 @@ import {
 } from '@chakra-ui/react'
 
 type idProps = {
-  id: number
+  id: number;
+  onCloseModal?: ()=>void
 }
 
-const Alert = ({ id }: idProps) => {
+const Alert = ({ id,onCloseModal }: idProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = useRef<HTMLButtonElement | null>(null)
   const { deleteTask } = useContext(TaskContext)
@@ -44,7 +45,16 @@ const Alert = ({ id }: idProps) => {
             <Button ref={cancelRef} onClick={onClose}>
               Não
             </Button>
-            <Button colorScheme="red" ml={3} onClick={() => deleteTask(id)}>
+            <Button
+              colorScheme="red"
+              ml={3}
+              onClick={() => {
+                deleteTask(id);
+                onClose();
+                if(onCloseModal)
+                onCloseModal();
+              }}
+            >
               Sim
             </Button>
           </AlertDialogFooter>
