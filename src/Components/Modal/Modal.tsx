@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import DatePickerComponent from '../DatePicker/DatePicker'
 import { TaskContext } from '../../Context/TaskContext'
-import taskProps from '../../Types/TaskSchema'
+import AlertTask from '../AlertDialog/Alert'
 
 import {
   Button,
@@ -211,6 +211,16 @@ const ModalComponent = ({ mode, id, date, open }: modeModalProps) => {
             >
               Salvar
             </Button>
+
+            {mode === 'editTask' && id ? (
+              <Button
+                style={{ backgroundColor: '#956fe8', color: 'white' }}
+                mr={3}
+              >
+                <AlertTask id={id} onCloseModal={onClose}/>
+              </Button>
+            ) : null}
+
             <Button
               style={{ backgroundColor: '#956fe8', color: 'white' }}
               mr={3}
